@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container-fluid">
+  <a class="btn btn-primary d-flex w-50 m-auto" href="{% url 'createtodo'%}">
+    ADD TODO</a
+  >
+  {% for todo in todos %}
+  <div class="card my-3 p-3 d-flex flex-column w-75 m-auto">
+    <div class="d-flex flex-nowrap justify-content-evenly">
+      <h5 class="card-title col">{{todo.title}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted col">{{todo.date_created}}</h6>
+      <p class="card-text col">Todo item for {{user.user_name}}</p>
+
+      <a class="btn btn-success" href="{% url 'updatetodo' todo.id%}">
+        update todo</a
+      >
+      <a class="btn btn-danger" href="{% url 'deletetodo' todo.id%}">
+        delete todo</a
+      >
+    </div>
+
+    <a class="btn btn-primary my-3" href="{% url 'createitem' todo.id%}">
+      add item</a
+    >
+    {% for item in todo.todoitem_set.all %} {% if item.is_completed %}
+    <h2>Completed</h2>
+    <ol class="text-decoration-line-through">
+      <li class="d-flex flex-nowrap justify-content-between">
+        <h3>{{item.title}} {{item.date_created}} {{item.description}}</h3>
+      </li>
+    </ol>
+    {% else %}
+    <h2>NOT Completed</h2>
+    <ol>
+      <li class="d-flex flex-nowrap justify-content-between">
+        <h3>{{item.title}}</h3>
+        <h3>{{item.title}} {{item.date_created}} {{item.description}}</h3>
+        <a class="btn btn-primary" href="{% url 'completed' item.id %}">
+          Completed
+        </a>
+      </li>
+    </ol>
+
+    {% endif %} {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}
