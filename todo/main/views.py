@@ -12,6 +12,7 @@ from users.models import CustomUser
 def home(request):
     if request.user:
         todos = Todo.objects.filter( user = request.user)
+        todos = todos.order_by("date_created")
     else:
         return redirect("login")
     context = {"user": request.user, "todos": todos}

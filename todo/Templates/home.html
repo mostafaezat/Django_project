@@ -21,19 +21,26 @@
     <a class="btn btn-primary my-3" href="{% url 'createitem' todo.id%}">
       add item</a
     >
-    {% for item in todo.todoitem_set.all %} {% if item.is_completed %}
     <h2>Completed</h2>
+    {% for item in todo.todoitem_set.all %} 
     <ol class="text-decoration-line-through">
+      {% if item.is_completed %}
       <li class="d-flex flex-nowrap justify-content-between">
-        <h3>{{item.title}} {{item.date_created}} {{item.description}}</h3>
+        <h3>{{item.title}} {{item.date_created}}</h3>
+        <h3>{{item.description}}</h3>
       </li>
+      {% endif %}
     </ol>
-    {% else %}
+    {% endfor %}
     <h2>NOT Completed</h2>
+    {% for item in todo.todoitem_set.all %} 
+    {% if item.is_completed == False %}
+
     <ol>
+
       <li class="d-flex flex-nowrap justify-content-between">
         <h3>{{item.title}}</h3>
-        <h3>{{item.title}} {{item.date_created}} {{item.description}}</h3>
+        <h3>{{item.title}} {{item.date_created}}</h3>
         <a class="btn btn-primary" href="{% url 'completed' item.id %}">
           Completed
         </a>

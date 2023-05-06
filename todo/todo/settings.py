@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     # crispy forms
     'crispy_forms',
     "crispy_bootstrap5",
+    # filter
+    'django_filters',
     # my user custom
     'users',
     'main',
