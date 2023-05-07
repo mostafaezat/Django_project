@@ -1,5 +1,15 @@
 {% extends 'base.html' %} {% block content %}
-<div class="card">
-  <h2 class="card-title">{{Todoitem.title}}</h2>
+<div class="card w-50 m-auto mt-5">
+  <div class="card-body">
+    <h5 class="card-title">{{Todoitem.title}}</h5>
+    <p class="card-subtitle mb-2 text-muted">
+      main todo is {{Todoitem.todo}} and created by {{Todoitem.todo.user}}
+    </p>
+    <p class="card-text">{{Todoitem.description}}</p>
+    <p class="card-text">{{Todoitem.date_created}}</p>
+    {% if Todoitem.is_completed %}
+    <h1>Not completed</h1>
+    {% endif %}
+  </div>
 </div>
 {% endblock content %}
